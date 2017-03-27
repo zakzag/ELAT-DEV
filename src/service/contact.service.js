@@ -58,8 +58,9 @@ function getContact(firstname, lastname) {
                 if (err) {
                     reject("server error")
                 } else {
-                    resolve(contact)
+                    console.info("GET:", contact);
                     log(contact, ACTION.GET);
+                    resolve(contact);
                 }
             });
     });
@@ -81,8 +82,8 @@ function updateContact(contactObj) {
                 if (err) {
                     reject("Unable to update")
                 } else {
-                    resolve(contact);
                     log(contact, ACTION.UPDATE);
+                    resolve(contact);
                 }
             });
     });
@@ -126,7 +127,7 @@ function getContactList() {
     });
 }
 
-function getContactHistory(firstname, lastname) {
+function getContactHistoryList(firstname, lastname) {
     return new Promise(function (resolve, reject) {
         logEntryModel
             .find({
@@ -188,7 +189,7 @@ module.exports = {
     updateContact: updateContact,
     deleteContact: deleteContact,
     getContactList: getContactList,
-    getContactHistory: getContactHistory,
+    getContactHistoryList: getContactHistoryList,
     createContactModelFromRequest: createContactModelFromRequest,
     createContactObjectFromRequest: createContactObjectFromRequest
 }

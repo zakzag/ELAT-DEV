@@ -64,7 +64,6 @@ function updateContact(req, res) {
  * @param {Object} res  Response object
  */
 function deleteContact(req, res) {
-    
     var firstname = req.query["firstname"];
     var lastname = req.query["lastname"];
 
@@ -99,7 +98,10 @@ function getContactList(req, res) {
  * @return {undefined}
  */
 function getContactHistory(req, res) {
-    contactService.getContactHistoryList(1)
+    var firstname = req.query["firstname"];
+    var lastname = req.query["lastname"];
+
+    contactService.getContactHistoryList(firstname, lastname)
         .then(function (result) {
             sendResponse(res, result, 200);
         });
@@ -118,7 +120,7 @@ function sendResponse(res, message, status) {
     res.status(status);
     res.json({
         success: isSuccessful(status),
-        message: message,
+        data: message,
         status: status
     });
 }

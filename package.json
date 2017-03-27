@@ -1,5 +1,5 @@
 {
-  "name": "test-task-ed",
+  "name": "ELAT-DEV",
   "version": "0.0.1",
   "license": "MIT",
   "engines": {
@@ -8,11 +8,17 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "node ./node_modules/mocha/mocha ./test  --watch"
   },
   "dependencies": {
     "express": "^4.14.1",
     "mongoose": "^4.8.1",
     "body-parser": "^1.17.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.11"
   }
 }
