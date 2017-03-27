@@ -1,5 +1,5 @@
-module.exports = {
-		mongodb: {
-				uri: "localhost"
-		}
+﻿module.exports = {
+	mongodb: {
+        uri: "mongodb://localhost/elat"
+	}
 };

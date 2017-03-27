@@ -25,4 +25,10 @@ const ContactSchema = new mongoose.Schema({
     }
 });
 
+ContactSchema.statics.findById = function (id) {
+    return this.find({
+        id: id
+    });
+}
+
 module.exports = mongoose.model('contact', ContactSchema);

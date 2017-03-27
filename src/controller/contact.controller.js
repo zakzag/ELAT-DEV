@@ -3,15 +3,6 @@
 const contactModel = require("../model/contact.model");
 const contactService = require("../service/contact.service");
 const assert = require("assert");
-const FIELD = {
-    CONTACT_ID: "contactId",
-    FIRSTNAME:  "firstname",
-    LASTNAME:   "lastname",
-    COUNTRY:     "country",
-    CITY:       "city",
-    ADDRESS:    "address",
-    PHONE:      "phone"
-}
 
 /**
  * Action for creating a contact
@@ -20,10 +11,13 @@ const FIELD = {
  * @param {Object} res  Response object
  */
 function createContact(req, res) {
-    var contact = createContactModelFromRequest(req);
+    var contact = contactService.createContactModelFromRequest(req.body);
+
     contactService.createContact(contact)
         .then(function (response) {
             sendResponse(res, response, 200);
+        }).catch(function () {
+            sendResponse(res, response, 500);
         });
 }
 
@@ -34,12 +28,14 @@ function createContact(req, res) {
  * @param {Object} res  Response object
  */
 function getContact(req, res) {
-    var contactId = req.query["contactId"];
+    var firstname = req.query["firstname"];
+    var lastname = req.query["lastname"];
 
-    contactService.getContact(contactId)
+    contactService.getContact(firstname, lastname)
         .then(function (message) {
             sendResponse(res, message, 200);
-        }).catch(function () {
+        })
+        .catch(function (message) {
             sendResponse(res, message, 500);
         });
 }
@@ -51,11 +47,13 @@ function getContact(req, res) {
  * @param {Object} res  Response object
  */
 function updateContact(req, res) {
-    var contact = createContactModelFromRequest(req);
+    var contact = contactService.createContactObjectFromRequest(req.body);
 
     contactService.updateContact(contact)
         .then(function (response) {
             sendResponse(res, response, 200);
+        }).catch(function (response) {
+            sendResponse(res, response, 500);
         });
 }
 
@@ -66,11 +64,17 @@ function updateContact(req, res) {
  * @param {Object} res  Response object
  */
 function deleteContact(req, res) {
-    var contactId = req.params["contactId"];
     
-    contactService.deleteContact(contactId).then(function (result) {
-        sendResponse(res, result, 200);
-    });
+    var firstname = req.query["firstname"];
+    var lastname = req.query["lastname"];
+
+    contactService.deleteContact(firstname, lastname)
+        .then(function (result) {
+            sendResponse(res, result, 200);
+        })
+        .catch(function () {
+            sendResponse(res, response, 500);
+        });
 }
 
 /**
@@ -116,23 +120,6 @@ function sendResponse(res, message, status) {
         success: isSuccessful(status),
         message: message,
         status: status
-    });
-}
-
-/**
- * Creates a model from the request object params
- *
- * @param {object} req  Request from express
- * @return {ContactModel} a mongoose contact model
- */
-function createContactModelFromRequest(req) {
-    return new contactModel({
-        firstname: req.params[FIELD.FIRSTNAME],
-        lastname: req.params[FIELD.LASTNAME],
-        country: req.params[FIELD.COUNTRY],
-        city: req.params[FIELD.CITY],
-        address: req.params[FIELD.ADDRESS],
-        phone: req.params[FIELD.PHONE]
     });
 }
 

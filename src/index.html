@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        form {
+            width: 300px;
+            padding: 10px;
+            margin: 5px;
+            background-color: #ebeded;
+            border: 1px solid #dedede;
+            font-family: Tahoma;
+        }
+
+        form fieldset {
+            border: 0px;
+        }
+
+        form table td:nth-of-type(2n+1) {
+            color: #88a;
+            font-weight: bold;
+            
+        }
+
+        form table tr:nth-of-type(2n+1) {
+            background-color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="/api/contact">
+        <fieldset>
+            <table>
+                <tr>
+                    <td>
+                        firstname
+                    </td>
+                    <td>
+                        <input type="text" name="firstname" value="john" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Lastname
+                    </td>
+                    <td>
+                        <input type="text" name="lastname" value="smith" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Country
+                    </td>
+                    <td>
+                        <input type="text" name="country" value="state" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        city
+                    </td>
+                    <td>
+                        <input type="text" name="city" value="cityben" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Address
+                    </td>
+                    <td>
+                        <input type="text" name="address" value="address something" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        phone
+                    </td>
+                    <td>
+                        <input type="text" name="phone" value="+367061111111" />
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Insert" />
+        </fieldset>
+    </form>
+    <form method="get" action="/api/contact">
+        <fieldset>
+            <table>
+                <tr>
+                    <td>
+                        firstname
+                    </td>
+                    <td>
+                        <input type="text" name="firstname" value="john" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Lastname
+                    </td>
+                    <td>
+                        <input type="text" name="lastname" value="smith" />
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Find" />
+        </fieldset>
+    </form>
+</body>
+</html>
